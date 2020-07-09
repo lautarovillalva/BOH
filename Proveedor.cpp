@@ -52,12 +52,30 @@ bool Proveedor::setDireccion(const char * direccion)
     return x;
 }
 //getters
-int Proveedor::getId(){return id;}
-const char * Proveedor::getCuit(){return cuit;}
-const char * Proveedor::getTelefono(){return telefono;}
-const char * Proveedor::getRsocial(){return rsocial;}
-const char * Proveedor::getDireccion(){return direccion;}
-const char * Proveedor::getMail(){return mail;}
+int Proveedor::getId()
+{
+    return id;
+}
+const char * Proveedor::getCuit()
+{
+    return cuit;
+}
+const char * Proveedor::getTelefono()
+{
+    return telefono;
+}
+const char * Proveedor::getRsocial()
+{
+    return rsocial;
+}
+const char * Proveedor::getDireccion()
+{
+    return direccion;
+}
+const char * Proveedor::getMail()
+{
+    return mail;
+}
 //constructor
 Proveedor::Proveedor()
 {
@@ -72,11 +90,28 @@ void Proveedor::nuevo()
 {
     if(cargar()==true)
     {
-        cout<<"-    CARGADO CORRECTAMENTE!"<<endl;
-        if(guardar()==true) cout<<"-    GUARDADO CORRECTAMENTE!"<<endl;
-        else cout<<"-    ERROR AL GUARDAR!"<<endl;
+        cout<<"------------------------------------------"<<endl;
+        cout<<"-    CARGADO CORRECTAMENTE!              -"<<endl;
+        cout<<"------------------------------------------"<<endl;
+        if(guardar()==true)
+        {
+            cout<<"------------------------------------------"<<endl;
+            cout<<"-    GUARDADO CORRECTAMENTE!             -"<<endl;
+            cout<<"------------------------------------------"<<endl;
+        }
+        else
+        {
+            cout<<"------------------------------------------"<<endl;
+            cout<<"-    ERROR AL GUARDAR!                   -"<<endl;
+            cout<<"------------------------------------------"<<endl;
+        }
     }
-    else cout<<"-    ERROR AL CARGAR!"<<endl;
+    else
+    {
+        cout<<"------------------------------------------"<<endl;
+        cout<<"-    ERROR AL CARGAR!                    -"<<endl;
+        cout<<"------------------------------------------"<<endl;
+    }
 }
 bool Proveedor::guardar()
 {
@@ -107,31 +142,38 @@ bool Proveedor::cargar()
     cout<<"- CARGAR ID            : "<<getId() << endl;
     cout<<"- CARGAR CUIT          : ";
     cargarcadena(cuit, 12);
-    if(setCuit(cuit)== false) return false;
-    cout<<"-CARGAR TELEFONO       : ";
+    if(setCuit(cuit)== false)
+        return false;
+    cout<<"- CARGAR TELEFONO       : ";
     cargarcadena(telefono, 11);
-    if(setTelefono(telefono)== false) return false;
+    if(setTelefono(telefono)== false)
+        return false;
     cout<<"- CARGAR RAZON SOCIAL  : ";
     cargarcadena(rsocial, 20);
-    if(setRsocial(rsocial)== false) return false;
+    if(setRsocial(rsocial)== false)
+        return false;
     cout<<"- CARGAR MAIL          : ";
     cargarcadena(mail, 30);
-    if(setMail(mail)== false) return false;
+    if(setMail(mail)== false)
+        return false;
     cout<<"- CARGAR DIRECCION     : ";
     cargarcadena(direccion, 20);
-    if(setDireccion(direccion)== false) return false;
+    if(setDireccion(direccion)== false)
+        return false;
     return true;
 }
 void Proveedor::mostrar(int modo)
 {
     if(modo== 1)
     {
+        cout<<"------------------------------------------"<<endl;
         cout<<"- ID           : " <<id << endl;
         cout<<"- CUIT         : " << cuit << endl;
         cout<<"- RAZON SOCIAL : " << rsocial << endl;
         cout<<"- MAIL         : " << mail << endl;
         cout<<"- TELEFONO     : " << telefono << endl;
         cout<<"- DIRECCION    : " << direccion << endl;
+        cout<<"------------------------------------------"<<endl;
     }
     if(modo== 2)
     {
@@ -140,7 +182,9 @@ void Proveedor::mostrar(int modo)
 }
 void mostrarxid_Proovedor()
 {
-    cout<<"-         MOSTRAR PROVEEDOR POR ID"<<endl;
+    cout<<"------------------------------------------"<<endl;
+    cout<<"-         MOSTRAR PROVEEDOR POR ID       -"<<endl;
+    cout<<"------------------------------------------"<<endl;
     bool mostrado=false;
     int idaux;
     cout<<"- ID PROVEEDOR QUE DESEA MOSTRAR: ";
@@ -150,7 +194,9 @@ void mostrarxid_Proovedor()
     p = fopen(ARCHIVO_PROVEEDORES, "rb");
     if(p== NULL)
     {
-        cout<<"- NO SE PUDO ABRIR EL ARCHIVO!"<< endl;
+        cout<<"------------------------------------------"<<endl;
+        cout<<"- NO SE PUDO ABRIR EL ARCHIVO!           -"<< endl;
+        cout<<"------------------------------------------"<<endl;
         return;
     }
     while(fread(&obj, sizeof(Proveedor), 1, p)== true)
@@ -163,7 +209,9 @@ void mostrarxid_Proovedor()
     }
     if(mostrado==false)
     {
-        cout<<"- ID PROVEEDOR NO ENCONTRADO!" << endl;
+        cout<<"------------------------------------------"<<endl;
+        cout<<"- ID PROVEEDOR NO ENCONTRADO!            -" << endl;
+        cout<<"------------------------------------------"<<endl;
     }
     fclose(p);
 }
@@ -173,14 +221,18 @@ void modificarProveedor()
     bool modificado= false;
     int aux;
     Proveedor obj;
-    cout<<"-    MODIFICAR PROVEEDOR"<<endl;
+    cout<<"------------------------------------------"<<endl;
+    cout<<"-    MODIFICAR PROVEEDOR                 -"<<endl;
+    cout<<"------------------------------------------"<<endl;
     cout<<"-    ID PROVEEDOR QUE DESEA MODIFICAR";
     aux= ingresoEnteroValidado();
     FILE * p;
     p=fopen(ARCHIVO_PROVEEDORES, "rb+");
     if(p==NULL)
     {
-        cout<<"- NO SE PUDO ABRIR EL ARCHIVO!"<< endl;
+        cout<<"------------------------------------------"<<endl;
+        cout<<"- NO SE PUDO ABRIR EL ARCHIVO!           -"<< endl;
+        cout<<"------------------------------------------"<<endl;
         return;
     }
     while(fread(&obj, sizeof(Proveedor), 1, p)== true)
@@ -191,27 +243,52 @@ void modificarProveedor()
             cout<<"-    "<<obj.getRsocial()<<endl;
             cout<<"-    MODIFICAR NUEVA DIRECCION: ";
             cargarcadena(cadaux, 20);
-            if(obj.setDireccion(cadaux)== false) return;
+            if(obj.setDireccion(cadaux)== false)
+                return;
             fseek(p, ftell(p)-sizeof(Proveedor), SEEK_SET);
             modificado= fwrite(&obj, sizeof(Proveedor), 1, p);
-            cout<<"- GUARDADO EXITOSO!" <<endl;
+            cout<<"------------------------------------------"<<endl;
+            cout<<"- GUARDADO EXITOSO!                      -"<<endl;
+            cout<<"------------------------------------------"<<endl;
             break;
         }
     }
     if(modificado==false)
     {
-        cout<<"- ERROR AL MODIFICAR ARTICULO!" << endl;
+        cout<<"------------------------------------------"<<endl;
+        cout<<"- ERROR AL MODIFICAR ARTICULO!           -"<< endl;
+        cout<<"------------------------------------------"<<endl;
     }
     fclose(p);
-
-
 }
-
-
-
-
-
-
-
-
-
+bool Proveedor::leer(int pos)
+{
+    bool leyo= false;
+    FILE * p;
+    p=fopen(ARCHIVO_PROVEEDORES, "rb");
+    if(p== NULL)
+        return false;
+    fseek(p, sizeof(Proveedor)*pos, SEEK_SET);
+    leyo= fread(this, sizeof(Proveedor), 1, p);
+    return leyo;
+}
+int buscarProveedor(int idP)
+{
+    Proveedor prov;
+    int i=0;
+    FILE * p;
+    p=fopen(ARCHIVO_PROVEEDORES, "rb");
+    if(p==NULL)
+        return -2;
+    while(fread(&prov, sizeof(Proveedor), 1, p)== true)
+    {
+        if(prov.getId()== idP)
+        {
+            fclose(p);
+            return i;
+        }
+        i++;
+    }
+    fclose(p);
+    return -1;
+}

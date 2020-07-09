@@ -28,6 +28,7 @@ public:
     //constructor
     Articulo();
 
+    bool leer(int );
     void nuevo();
     bool cargar();
     bool guardar();
@@ -38,5 +39,5 @@ public:
 int generarID_articulo();
 void modificarArticulo();
 void mostrarxid_Articulo();
-
+int buscarArticulo(int );
 #endif // ARTICULO_H_INCLUDED

@@ -5,7 +5,7 @@ using namespace std;
 #include "Pedido.h"
 #include "Articulo.h"
 #include "Funciones.h"
-
+#include "Proveedor.h"
 
 //setters
 bool Pedido::setCodigo(int codigo)
@@ -55,13 +55,34 @@ void Pedido::setEstado(bool estado)
     this->estado= estado;
 }
 //getters
-int Pedido::getCodigo(){return codigo;}
-int Pedido::getIDArticulo(){return idArticulo;}
-int Pedido::getIDProveedor(){return idProveedor;}
-Fecha Pedido::getFechaEncargo(){return f_encargo;}
-Fecha Pedido::getFechaIngreso(){return f_ingreso;}
-int Pedido::getCantidad(){return cantidad;}
-bool Pedido::getEstado(){return estado;}
+int Pedido::getCodigo()
+{
+    return codigo;
+}
+int Pedido::getIDArticulo()
+{
+    return idArticulo;
+}
+int Pedido::getIDProveedor()
+{
+    return idProveedor;
+}
+Fecha Pedido::getFechaEncargo()
+{
+    return f_encargo;
+}
+Fecha Pedido::getFechaIngreso()
+{
+    return f_ingreso;
+}
+int Pedido::getCantidad()
+{
+    return cantidad;
+}
+bool Pedido::getEstado()
+{
+    return estado;
+}
 //constructor
 Pedido::Pedido()
 {
@@ -88,14 +109,28 @@ void Pedido::nuevo()
 {
     if(cargar()==true)
     {
-        cout<<"-    CARGADO CORRECTAMENTE!"<<endl;
+        cout<<"------------------------------------------"<<endl;
+        cout<<"-    CARGADO CORRECTAMENTE!              -"<<endl;
+        cout<<"------------------------------------------"<<endl;
         if(guardar()==true)
-            cout<<"-    GUARDADO CORRECTAMENTE!"<<endl;
+        {
+            cout<<"------------------------------------------"<<endl;
+            cout<<"-    GUARDADO CORRECTAMENTE!             -"<<endl;
+            cout<<"------------------------------------------"<<endl;
+        }
         else
-            cout<<"-    ERROR AL GUARDAR!"<<endl;
+        {
+            cout<<"------------------------------------------"<<endl;
+            cout<<"-    ERROR AL GUARDAR!                   -"<<endl;
+            cout<<"------------------------------------------"<<endl;
+        }
     }
     else
-        cout<<"-    ERROR AL CARGAR!"<<endl;
+    {
+        cout<<"------------------------------------------"<<endl;
+        cout<<"-    ERROR AL CARGAR!                    -"<<endl;
+        cout<<"------------------------------------------"<<endl;
+    }
 }
 bool Pedido::guardar()
 {
@@ -112,6 +147,9 @@ bool Pedido::guardar()
 }
 bool Pedido::cargar()
 {
+    Articulo art;
+    Proveedor prov;
+    int pos;
     Fecha fec;
     fec.setHoy();
     setFechaEncargo(fec);
@@ -120,17 +158,44 @@ bool Pedido::cargar()
     fec.setAnio(0);
     setFechaIngreso(fec);
     setCodigo(generarID_pedido());
-    cout<<"-    CARGAR PEDIDO" << endl;
+    cout<<"------------------------------------------"<<endl;
+    cout<<"-    CARGAR PEDIDO                       -"<< endl;
+    cout<<"------------------------------------------"<<endl;
     cout<<"-    CARGAR CODIGO DE PEDIDO: "<< getCodigo() << endl;
-    cout<<"-    CARGAR ID ARTICULO     :";
+    cout<<"-    CARGAR ID ARTICULO     : ";
     idArticulo= ingresoEnteroValidado();
-    if(setIDArticulo(idArticulo)== false) return false;
+    pos= buscarArticulo(idArticulo);
+    if(pos== -2)
+    {
+        cout<<"------------------------------------------"<<endl;
+        cout<<"-    NO SE PUDO ABRIR EL ARCHIVO!        -"<<endl;
+        cout<<"------------------------------------------"<<endl;
+    }
+    if(pos== -1)
+    {
+        cout<<"------------------------------------------"<<endl;
+        cout<<"-    ID ARTICULO NO ENCONTRADO!          -"<<endl;
+        cout<<"------------------------------------------"<<endl;
+    }
+    if(pos<0)
+        return false;
+    art.leer(pos);
+    cout<<"-    "<<art.getModelo()<< endl;
+    if(setIDArticulo(idArticulo)== false)
+        return false;
     cout<<"-    CARGAR ID PROVEEDOR    : ";
     idProveedor= ingresoEnteroValidado();
-    if(setIDProveedor(idProveedor)== false) return false;
+    pos= buscarProveedor(idProveedor);
+    if(pos<0)
+        return false;
+    prov.leer(pos);
+    cout<<"-    "<<prov.getRsocial()<< endl;
+    if(setIDProveedor(idProveedor)== false)
+        return false;
     cout<<"-    CARGAR CANTIDAD        : ";
     cantidad= ingresoEnteroValidado();
-    if(setCantidad(cantidad)== false) return false;
+    if(setCantidad(cantidad)== false)
+        return false;
     setEstado(1);
     return true;
 }
@@ -138,6 +203,7 @@ void Pedido::mostrar(int modo)
 {
     if(modo== 1)
     {
+        cout<<"------------------------------------------"<<endl;
         cout<<"- CODIGO           : "<< codigo <<endl;
         cout<<"- ID ARTICULO      : "<< idArticulo<<endl;
         cout<<"- ID PROVEEDOR     : "<< idProveedor<<endl;
@@ -154,11 +220,14 @@ void Pedido::mostrar(int modo)
             getFechaIngreso().MostrarFecha();
         }
         cout<<"- CANTIDAD PEDIDA  : " << cantidad << endl;
+        cout<<"------------------------------------------"<<endl;
     }
 }
 void mostrarxid_pedido()
 {
-        cout<<"-         MOSTRAR PEDIDO POR CODIGO"<<endl;
+    cout<<"------------------------------------------"<<endl;
+    cout<<"-         MOSTRAR PEDIDO POR CODIGO      -"<<endl;
+    cout<<"------------------------------------------"<<endl;
     bool mostrado=false;
     int idaux;
     cout<<"- CODIGO DE PEDIDO QUE DESEA MOSTRAR: ";
@@ -168,7 +237,9 @@ void mostrarxid_pedido()
     p = fopen(ARCHIVO_PEDIDOS, "rb");
     if(p== NULL)
     {
-        cout<<"- NO SE PUDO ABRIR EL ARCHIVO!"<< endl;
+        cout<<"------------------------------------------"<<endl;
+        cout<<"- NO SE PUDO ABRIR EL ARCHIVO!           -"<< endl;
+        cout<<"------------------------------------------"<<endl;
         return;
     }
     while(fread(&obj, sizeof(Pedido), 1, p)== true)
@@ -181,7 +252,9 @@ void mostrarxid_pedido()
     }
     if(mostrado==false)
     {
-        cout<<"- CODIGO DE PEDIDO NO ENCONTRADO!" << endl;
+        cout<<"------------------------------------------"<<endl;
+        cout<<"- CODIGO DE PEDIDO NO ENCONTRADO!        -" << endl;
+        cout<<"------------------------------------------"<<endl;
     }
     fclose(p);
 }
@@ -191,14 +264,18 @@ void ingresarPedido()
     Pedido ped;
     Articulo art;
     int aux;
-    cout<<"-    INGRESAR PEDIDO"<< endl;
+    cout<<"------------------------------------------"<<endl;
+    cout<<"-    INGRESAR PEDIDO                     -"<< endl;
+    cout<<"------------------------------------------"<<endl;
     cout<<"- INGRESAR CODIGO DE PEDIDO:";
     aux= ingresoEnteroValidado();
     FILE * p;
     p=fopen(ARCHIVO_PEDIDOS, "rb+");
     if(p==NULL)
     {
-        cout<<"-    NO SE PUDO ABRIR EL ARCHIVO!" << endl;
+        cout<<"------------------------------------------"<<endl;
+        cout<<"-    NO SE PUDO ABRIR EL ARCHIVO!        -"<< endl;
+        cout<<"------------------------------------------"<<endl;
         return;
     }
     while(fread(&ped, sizeof(Pedido), 1, p)== true)
@@ -211,17 +288,29 @@ void ingresarPedido()
             ped.setEstado(false);
             fseek(p, ftell(p)-sizeof(Pedido), SEEK_SET);
             encontrado= fwrite(&ped, sizeof(Pedido), 1, p);
-            if(encontrado== true) cout<<"-  PEDIDO ENCONTRADO!" <<endl;
+            if(encontrado== true)
+            {
+                cout<<"------------------------------------------"<<endl;
+                cout<<"-    PEDIDO ENCONTRADO!                  -" <<endl;
+                cout<<"------------------------------------------"<<endl;
+            }
             break;
         }
     }
-    if(encontrado== false) cout<<"- ERROR AL ENCONTRAR PEDIDO! "<<endl;
+    if(encontrado== false)
+    {
+        cout<<"------------------------------------------"<<endl;
+        cout<<"-    ERROR AL ENCONTRAR PEDIDO!          -"<<endl;
+        cout<<"------------------------------------------"<<endl;
+    }
     fclose(p);
     FILE * p1;
     p1= fopen(ARCHIVO_ARTICULOS, "rb+");
     if(p1==NULL)
     {
-        cout<<"-    NO SE PUDO ABRIR EL ARCHIVO!" << endl;
+        cout<<"------------------------------------------"<<endl;
+        cout<<"-    NO SE PUDO ABRIR EL ARCHIVO!        -" << endl;
+        cout<<"------------------------------------------"<<endl;
     }
     while(fread(&art, sizeof(Articulo), 1, p)== true)
     {
@@ -232,10 +321,20 @@ void ingresarPedido()
             art.setCantidad(cant);
             fseek(p1, ftell(p)-sizeof(Articulo), SEEK_SET);
             encontrado= fwrite(&art, sizeof(Articulo), 1, p);
-            if(encontrado== true) cout<<"-  PEDIDO INGRESADO A STOCK!"<< endl;
+            if(encontrado== true)
+            {
+                cout<<"------------------------------------------"<<endl;
+                cout<<"-    PEDIDO INGRESADO A STOCK!           -"<< endl;
+                cout<<"------------------------------------------"<<endl;
+            }
             break;
         }
     }
-    if(encontrado== false) cout<<"- ERROR AL INGRESAR PEDIDO AL STOCK! "<<endl;
+    if(encontrado== false)
+    {
+        cout<<"------------------------------------------"<<endl;
+        cout<<"-    ERROR AL INGRESAR PEDIDO AL STOCK!  -"<<endl;
+        cout<<"------------------------------------------"<<endl;
+    }
     fclose(p1);
 }

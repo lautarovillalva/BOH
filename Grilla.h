@@ -32,6 +32,4 @@ public:
 void mostrarGrillaxId();
 void desengrillar();
 
-
-
 #endif // GRILLA_H_INCLUDED

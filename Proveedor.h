@@ -3,7 +3,8 @@
 
 const char ARCHIVO_PROVEEDORES[]= "proveedores.dat";
 
-class Proveedor{
+class Proveedor
+{
 private:
     int id;
     char cuit[12];
@@ -28,14 +29,19 @@ public:
     const char * getMail();
     //constructor
     Proveedor();
+
+    bool leer(int );
     void nuevo();
     bool cargar();
     bool guardar();
     void mostrar(int );
-    };
+};
 
 int generarID_proveedor();
 void modificarProveedor();
 void mostrarxid_Proovedor();
+int buscarProveedor(int );
+
+
 
 #endif // PROVEEDOR_H_INCLUDED

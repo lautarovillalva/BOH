@@ -15,28 +15,28 @@ private:
     bool estado;
 public:
     //setters
-bool setCodigo(int );
-bool setIDArticulo(int );
-bool setIDProveedor(int );
-bool setFechaEncargo(Fecha );
-bool setFechaIngreso(Fecha );
-bool setCantidad(int );
-void setEstado(bool );
+    bool setCodigo(int );
+    bool setIDArticulo(int );
+    bool setIDProveedor(int );
+    bool setFechaEncargo(Fecha );
+    bool setFechaIngreso(Fecha );
+    bool setCantidad(int );
+    void setEstado(bool );
 //getters
-int getCodigo();
-int getIDArticulo();
-int getIDProveedor();
-Fecha getFechaEncargo();
-Fecha getFechaIngreso();
-int getCantidad();
-bool getEstado();
+    int getCodigo();
+    int getIDArticulo();
+    int getIDProveedor();
+    Fecha getFechaEncargo();
+    Fecha getFechaIngreso();
+    int getCantidad();
+    bool getEstado();
 //constructor
-Pedido();
+    Pedido();
 
-void nuevo();
-bool cargar();
-bool guardar();
-void mostrar(int );
+    void nuevo();
+    bool cargar();
+    bool guardar();
+    void mostrar(int );
 
 };
 int generarID_pedido();

@@ -1,4 +1,7 @@
 #include <iostream>
+using namespace std;
+#include "rlutil.h"
+using namespace rlutil;
 #include "Articulo.h"
 #include "Proveedor.h"
 #include "Pedido.h"
@@ -6,10 +9,10 @@
 #include "Deposito.h"
 #include "Listado.h"
 #include "Funciones.h"
-using namespace std;
 
 int main()
 {
+    setColor(WHITE);
     Deposito dep;
     dep.menuPrincipal();
 

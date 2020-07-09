@@ -54,12 +54,30 @@ bool Articulo::setPrecio(float precio)
     return x;
 }
 //getters
-int Articulo::getId(){return id;}
-const char * Articulo::getModelo(){return modelo;}
-const char * Articulo::getTalle(){return talle;}
-const char * Articulo::getGenero(){return genero;}
-int Articulo::getCantidad(){return cantidad;}
-float Articulo::getPrecio(){return precio;}
+int Articulo::getId()
+{
+    return id;
+}
+const char * Articulo::getModelo()
+{
+    return modelo;
+}
+const char * Articulo::getTalle()
+{
+    return talle;
+}
+const char * Articulo::getGenero()
+{
+    return genero;
+}
+int Articulo::getCantidad()
+{
+    return cantidad;
+}
+float Articulo::getPrecio()
+{
+    return precio;
+}
 //constructor
 Articulo::Articulo()
 {
@@ -84,14 +102,28 @@ void Articulo::nuevo()
 {
     if(cargar()==true)
     {
-        cout<<"-    CARGADO CORRECTAMENTE!"<<endl;
+        cout<<"------------------------------------------"<<endl;
+        cout<<"-    CARGADO CORRECTAMENTE!              -"<<endl;
+        cout<<"------------------------------------------"<<endl;
         if(guardar()==true)
-            cout<<"-    GUARDADO CORRECTAMENTE!"<<endl;
+        {
+            cout<<"------------------------------------------"<<endl;
+            cout<<"-    GUARDADO CORRECTAMENTE!             -"<<endl;
+            cout<<"------------------------------------------"<<endl;
+        }
         else
-            cout<<"-    ERROR AL GUARDAR!"<<endl;
+        {
+            cout<<"------------------------------------------"<<endl;
+            cout<<"-    ERROR AL GUARDAR!                   -"<<endl;
+            cout<<"------------------------------------------"<<endl;
+        }
     }
     else
-        cout<<"-    ERROR AL CARGAR!"<<endl;
+    {
+        cout<<"------------------------------------------"<<endl;
+        cout<<"-    ERROR AL CARGAR!                    -"<<endl;
+        cout<<"------------------------------------------"<<endl;
+    }
 }
 bool Articulo::guardar()
 {
@@ -110,21 +142,27 @@ bool Articulo::cargar()
 {
 
     setId(generarID_articulo());
-    cout<<"-    1) CARGAR ARTICULO"<<endl;
+    cout<<"------------------------------------------"<<endl;
+    cout<<"-    1) CARGAR ARTICULO                  -"<<endl;
+    cout<<"------------------------------------------"<<endl;
     cout<<"-    CARGAR ID       : ";
     cout<< getId() << endl;
     cout<<"-    CARGAR MODELO   : ";
     cargarcadena(modelo, 20);
-    if(setModelo(modelo)==false) return false;
+    if(setModelo(modelo)==false)
+        return false;
     cout<<"-    CARGAR TALLE    : ";
     cargarcadena(talle, 5);
-    if(setTalle(talle)== false) return false;
+    if(setTalle(talle)== false)
+        return false;
     cout<<"-    CARGAR GENERO   : ";
     cargarcadena(genero, 10);
-    if(setGenero(genero)== false) return false;
-    cout<<"-    CARGAR PRECIO   :$";
+    if(setGenero(genero)== false)
+        return false;
+    cout<<"-    CARGAR PRECIO   : $";
     precio= ingresoFlotanteValidado();
-    if(setPrecio(precio)== false) return false;
+    if(setPrecio(precio)== false)
+        return false;
     setCantidad(0);
     return true;
 }
@@ -133,12 +171,14 @@ void Articulo::mostrar(int modo)
 {
     if(modo== 1)
     {
+        cout<<"------------------------------------------"<<endl;
         cout<<"-       ID: " << id << endl;
         cout<<"-   MODELO: " << modelo << endl;
         cout<<"-    TALLE: " << talle << endl;
         cout<<"-   GENERO: " << genero << endl;
         cout<<"- CANTIDAD: " << cantidad << endl;
         cout<<"-   PRECIO: $" << precio << endl;
+        cout<<"------------------------------------------"<<endl;
     }
     if(modo== 2)
     {
@@ -151,14 +191,18 @@ void modificarArticulo()
     bool modificado= false;
     int aux;
     Articulo obj;
-    cout<<"-    MODIFICAR ARTICULO"<<endl;
+    cout<<"------------------------------------------"<<endl;
+    cout<<"-    MODIFICAR ARTICULO                  -"<<endl;
+    cout<<"------------------------------------------"<<endl;
     cout<<"-    ID ARTICULO QUE DESEA MODIFICAR: ";
     aux= ingresoEnteroValidado();
     FILE * p;
     p=fopen(ARCHIVO_ARTICULOS, "rb+");
     if(p==NULL)
     {
-        cout<<"- NO SE PUDO ABRIR EL ARCHIVO!"<< endl;
+        cout<<"------------------------------------------"<<endl;
+        cout<<"- NO SE PUDO ABRIR EL ARCHIVO!           -"<< endl;
+        cout<<"------------------------------------------"<<endl;
         return;
     }
     while(fread(&obj, sizeof(Articulo), 1, p)== true)
@@ -169,7 +213,8 @@ void modificarArticulo()
             cout<<"-    "<<obj.getModelo()<<endl;
             cout<<"-    MODIFICAR NUEVA CANTIDAD: ";
             aux2= ingresoEnteroValidado();
-            if(obj.setCantidad(aux2)== false) return;
+            if(obj.setCantidad(aux2)== false)
+                return;
             fseek(p, ftell(p)-sizeof(Articulo), SEEK_SET);
             modificado= fwrite(&obj, sizeof(Articulo), 1, p);
             cout<<"- GUARDADO EXITOSO!" <<endl;
@@ -178,14 +223,18 @@ void modificarArticulo()
     }
     if(modificado==false)
     {
-        cout<<"- ERROR AL MODIFICAR ARTICULO!" << endl;
+        cout<<"------------------------------------------"<<endl;
+        cout<<"- ERROR AL MODIFICAR ARTICULO!           -" << endl;
+        cout<<"------------------------------------------"<<endl;
     }
     fclose(p);
 
 }
 void mostrarxid_Articulo()
 {
-    cout<<"-         MOSTRAR ARTICULO POR ID"<<endl;
+    cout<<"------------------------------------------"<<endl;
+    cout<<"-         MOSTRAR ARTICULO POR ID        -"<<endl;
+    cout<<"------------------------------------------"<<endl;
     bool mostrado=false;
     int idaux;
     cout<<"- ID ARTICULO QUE DESEA MOSTRAR: ";
@@ -195,7 +244,9 @@ void mostrarxid_Articulo()
     p = fopen(ARCHIVO_ARTICULOS, "rb");
     if(p== NULL)
     {
-        cout<<"- NO SE PUDO ABRIR EL ARCHIVO!"<< endl;
+        cout<<"------------------------------------------"<<endl;
+        cout<<"-    NO SE PUDO ABRIR EL ARCHIVO!        -"<<endl;
+        cout<<"------------------------------------------"<<endl;
         return;
     }
     while(fread(&obj, sizeof(Articulo), 1, p)== true)
@@ -208,11 +259,41 @@ void mostrarxid_Articulo()
     }
     if(mostrado==false)
     {
-        cout<<"- ID CLIENTE NO ENCONTRADO!" << endl;
+        cout<<"------------------------------------------"<<endl;
+        cout<<"-    ID ARTICULO NO ENCONTRADO!          -"<< endl;
+        cout<<"------------------------------------------"<<endl;
     }
     fclose(p);
 }
 
-
-
-
+bool Articulo::leer(int pos)
+{
+    bool leyo= false;
+    FILE * p;
+    p= fopen(ARCHIVO_ARTICULOS, "rb");
+    if(p==NULL)
+        return false;
+    fseek(p, sizeof(Articulo)* pos, SEEK_SET);
+    leyo= fread(this, sizeof(Articulo), 1, p);
+    return leyo;
+}
+int buscarArticulo(int idA)
+{
+    Articulo art;
+    int i=0;
+    FILE * p;
+    p=fopen(ARCHIVO_ARTICULOS, "rb");
+    if(p==NULL)
+        return -2;
+    while(fread(&art, sizeof(Articulo), 1, p)== true)
+    {
+        if(art.getId()== idA)
+        {
+            fclose(p);
+            return i;
+        }
+        i++;
+    }
+    fclose(p);
+    return -1;
+}

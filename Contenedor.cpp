@@ -19,8 +19,14 @@ bool Contenedor::setEstante(char estante)
     return x;
 }
 //getters
-int Contenedor::getNumero(){return numero;}
-char Contenedor::getEstante(){return estante;}
+int Contenedor::getNumero()
+{
+    return numero;
+}
+char Contenedor::getEstante()
+{
+    return estante;
+}
 //constructor
 Contenedor::Contenedor()
 {
@@ -29,23 +35,17 @@ Contenedor::Contenedor()
 }
 bool Contenedor::cargar()
 {
-    cout<<"-    INGRESAR CONTENEDOR:";
+    cout<<"-    INGRESAR CONTENEDOR : ";
     cin>>numero;
-    if(setNumero(numero)== false) return false;
-    cout<<"-    INGRESAR ESTANTE:";
+    if(setNumero(numero)== false)
+        return false;
+    cout<<"-    INGRESAR ESTANTE    : ";
     cin>>estante;
-    if(setEstante(estante)== false) return false;
+    if(setEstante(estante)== false)
+        return false;
     return true;
 }
 void Contenedor::mostrar()
 {
     cout<<"["<<numero<<estante<<"]";
 }
-
-
-
-
-
-
-
-

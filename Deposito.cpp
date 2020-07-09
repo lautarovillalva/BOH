@@ -16,17 +16,18 @@ void Deposito::menuPrincipal()
     while(!salir)
     {
         system("cls");
-        cout<<"|"<<endl;
-        cout<<"|            MENU PRINCIPAL"<<endl;
-        cout<<"|"<<endl;
-        cout<<"|        1) ARTICULO"<<endl;
-        cout<<"|        2) PROVEEDOR"<<endl;
-        cout<<"|        3) PEDIDO"<<endl;
-        cout<<"|        4) ENGRILLAR/DESENGRILLAR"<<endl;
-        cout<<"|        5) LISTADOS"<<endl;
-        cout<<"|"<<endl;
-        cout<<"|        0) SALIR DEL PROGRAMA"<<endl;
-        cout<<"|"<<endl;
+        cout<<"------------------------------------------"<<endl;
+        cout<<"-            MENU  PRINCIPAL             -"<<endl;
+        cout<<"-             BACK OF HOUSE              -"<<endl;
+        cout<<"------------------------------------------"<<endl;
+        cout<<"-        1) ARTICULO                     -"<<endl;
+        cout<<"-        2) PROVEEDOR                    -"<<endl;
+        cout<<"-        3) PEDIDO                       -"<<endl;
+        cout<<"-        4) ENGRILLAR/DESENGRILLAR       -"<<endl;
+        cout<<"-        5) LISTADOS                     -"<<endl;
+        cout<<"------------------------------------------"<<endl;
+        cout<<"-        0) SALIR DEL PROGRAMA           -"<<endl;
+        cout<<"------------------------------------------"<<endl;
         opcion= ingresoEnteroValidado();
         switch(opcion)
         {
@@ -57,7 +58,8 @@ void Deposito::menuPrincipal()
         break;
         default:
         {
-            cout<<"|    OPCION NO VALIDA!"<<endl;
+            cout<<"-    OPCION NO VALIDA!                   -"<<endl;
+            cout<<"------------------------------------------"<<endl;
             system("pause");
         }
         break;
@@ -78,15 +80,15 @@ void Deposito::menuArticulo()
     while(!salir)
     {
         system("cls");
-        cout<<"|"<<endl;
-        cout<<"|            MENU ARTICULO"<<endl;
-        cout<<"|"<<endl;
-        cout<<"|        1) CARGAR ARTICULO"<<endl;
-        cout<<"|        2) MOSTRAR ARTICULO"<<endl;
-        cout<<"|        3) MODIFICAR CANTIDAD ARTICULO"<<endl;
-        cout<<"|"<<endl;
-        cout<<"|        0) VOLVER AL MENU"<<endl;
-        cout<<"|"<<endl;
+        cout<<"------------------------------------------"<<endl;
+        cout<<"-            MENU ARTICULO               -"<<endl;
+        cout<<"------------------------------------------"<<endl;
+        cout<<"-        1) CARGAR ARTICULO              -"<<endl;
+        cout<<"-        2) MOSTRAR ARTICULO             -"<<endl;
+        cout<<"-        3) MODIFICAR CANTIDAD ARTICULO  -"<<endl;
+        cout<<"------------------------------------------"<<endl;
+        cout<<"-        0) VOLVER AL MENU               -"<<endl;
+        cout<<"------------------------------------------"<<endl;
         opcion= ingresoEnteroValidado();
         switch(opcion)
         {
@@ -110,7 +112,8 @@ void Deposito::menuArticulo()
         break;
         default:
         {
-            cout<<"|    OPCION NO VALIDA!"<<endl;
+            cout<<"-    OPCION NO VALIDA!                   -"<<endl;
+            cout<<"------------------------------------------"<<endl;
             system("pause");
         }
         break;
@@ -133,15 +136,15 @@ void Deposito::menuProveedor()
     while(!salir)
     {
         system("cls");
-        cout<<"|"<<endl;
-        cout<<"|            MENU PROVEEDOR"<<endl;
-        cout<<"|"<<endl;
-        cout<<"|        1) CARGAR PROVEEDOR"<<endl;
-        cout<<"|        2) MOSTRAR PROVEEDOR"<<endl;
-        cout<<"|        3) MODIFICAR PROVEEDOR"<<endl;
-        cout<<"|"<<endl;
-        cout<<"|        0) VOLVER AL MENU"<<endl;
-        cout<<"|"<<endl;
+        cout<<"------------------------------------------"<<endl;
+        cout<<"-            MENU PROVEEDOR              -"<<endl;
+        cout<<"------------------------------------------"<<endl;
+        cout<<"-        1) CARGAR PROVEEDOR             -"<<endl;
+        cout<<"-        2) MOSTRAR PROVEEDOR            -"<<endl;
+        cout<<"-        3) MODIFICAR PROVEEDOR          -"<<endl;
+        cout<<"------------------------------------------"<<endl;
+        cout<<"-        0) VOLVER AL MENU               -"<<endl;
+        cout<<"------------------------------------------"<<endl;
         opcion= ingresoEnteroValidado();
         switch(opcion)
         {
@@ -185,15 +188,15 @@ void Deposito::menuPedido()
     while(!salir)
     {
         system("cls");
-        cout<<"|"<<endl;
-        cout<<"|            MENU PEDIDO"<<endl;
-        cout<<"|"<<endl;
-        cout<<"|        1) CARGAR PEDIDO"<<endl;
-        cout<<"|        2) MOSTRAR PEDIDO"<<endl;
-        cout<<"|        3) INGRESAR PEDIDO"<<endl;
-        cout<<"|"<<endl;
-        cout<<"|        0) VOLVER AL MENU"<<endl;
-        cout<<"|"<<endl;
+        cout<<"------------------------------------------"<<endl;
+        cout<<"-            MENU PEDIDO                 -"<<endl;
+        cout<<"------------------------------------------"<<endl;
+        cout<<"-        1) CARGAR PEDIDO                -"<<endl;
+        cout<<"-        2) MOSTRAR PEDIDO               -"<<endl;
+        cout<<"-        3) INGRESAR PEDIDO              -"<<endl;
+        cout<<"------------------------------------------"<<endl;
+        cout<<"-        0) VOLVER AL MENU               -"<<endl;
+        cout<<"------------------------------------------"<<endl;
         opcion= ingresoEnteroValidado();
         switch(opcion)
         {
@@ -217,7 +220,8 @@ void Deposito::menuPedido()
         break;
         default:
         {
-            cout<<"|    OPCION NO VALIDA!"<<endl;
+            cout<<"-    OPCION NO VALIDA!                   -"<<endl;
+            cout<<"------------------------------------------"<<endl;
             system("pause");
         }
         break;
@@ -237,15 +241,15 @@ void Deposito::menuGrilla()
     while(!salir)
     {
         system("cls");
-        cout<<"|"<<endl;
-        cout<<"|            MENU GRILLA"<<endl;
-        cout<<"|"<<endl;
-        cout<<"|        1) ENGRILLAR"<<endl;
-        cout<<"|        2) DESENGRILLAR"<<endl;
-        cout<<"|        3) MOSTRAR GRILLA POR ID"<<endl;
-        cout<<"|"<<endl;
-        cout<<"|        0) VOLVER AL MENU"<<endl;
-        cout<<"|"<<endl;
+        cout<<"------------------------------------------"<<endl;
+        cout<<"|            MENU GRILLA                 -"<<endl;
+        cout<<"------------------------------------------"<<endl;
+        cout<<"|        1) ENGRILLAR                    -"<<endl;
+        cout<<"|        2) DESENGRILLAR                 -"<<endl;
+        cout<<"|        3) MOSTRAR GRILLA POR ID        -"<<endl;
+        cout<<"------------------------------------------"<<endl;
+        cout<<"|        0) VOLVER AL MENU               -"<<endl;
+        cout<<"------------------------------------------"<<endl;
         opcion= ingresoEnteroValidado();
         switch(opcion)
         {
@@ -263,13 +267,14 @@ void Deposito::menuGrilla()
         break;
         case 3:
         {
-             mostrarGrillaxId();
+            mostrarGrillaxId();
             system("pause");
         }
         break;
         default:
         {
-            cout<<"|    OPCION NO VALIDA!"<<endl;
+            cout<<"-    OPCION NO VALIDA!                   -"<<endl;
+            cout<<"------------------------------------------"<<endl;
             system("pause");
         }
         break;
@@ -289,17 +294,17 @@ void Deposito::menuListado()
     while(!salir)
     {
         system("cls");
-        cout<<"|"<<endl;
-        cout<<"|            MENU LISTADO"<<endl;
-        cout<<"|"<<endl;
-        cout<<"|        1) LISTAR ARTICULOS"<<endl;
-        cout<<"|        2) LISTAR PROVEEDORES"<<endl;
-        cout<<"|        3) LISTAR GRILLA"<<endl;
-        cout<<"|        4) LISTAR PEDIDOS INGRESADOS"<<endl;
-        cout<<"|        5) LISTAR PEDIDOS NO INGRESADOS"<<endl;
-        cout<<"|"<<endl;
-        cout<<"|        0) VOLVER AL MENU"<<endl;
-        cout<<"|"<<endl;
+        cout<<"------------------------------------------"<<endl;
+        cout<<"-            MENU LISTADO                -"<<endl;
+        cout<<"------------------------------------------"<<endl;
+        cout<<"-        1) LISTAR ARTICULOS             -"<<endl;
+        cout<<"-        2) LISTAR PROVEEDORES           -"<<endl;
+        cout<<"-        3) LISTAR GRILLA                -"<<endl;
+        cout<<"-        4) LISTAR PEDIDOS INGRESADOS    -"<<endl;
+        cout<<"-        5) LISTAR PEDIDOS NO INGRESADOS -"<<endl;
+        cout<<"------------------------------------------"<<endl;
+        cout<<"-        0) VOLVER AL MENU               -"<<endl;
+        cout<<"------------------------------------------"<<endl;
         opcion= ingresoEnteroValidado();
         switch(opcion)
         {
@@ -335,7 +340,8 @@ void Deposito::menuListado()
         break;
         default:
         {
-            cout<<"|    OPCION NO VALIDA!"<<endl;
+            cout<<"-    OPCION NO VALIDA!                   -"<<endl;
+            cout<<"------------------------------------------"<<endl;
             system("pause");
         }
         break;
