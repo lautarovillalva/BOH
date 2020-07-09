@@ -12,6 +12,8 @@ using namespace rlutil;
 
 int main()
 {
+
+
     setColor(WHITE);
     Deposito dep;
     dep.menuPrincipal();

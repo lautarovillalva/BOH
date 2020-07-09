@@ -2,7 +2,7 @@
 using namespace std;
 #include "cstdio"
 #include "Contenedor.h"
-
+#include "cstring"
 //setters
 bool Contenedor::setNumero(int numero)
 {
@@ -15,6 +15,7 @@ bool Contenedor::setEstante(char estante)
 {
     bool x= true;
     //val
+    estante=toupper(estante);
     this->estante= estante;
     return x;
 }

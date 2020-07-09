@@ -161,7 +161,7 @@ bool Pedido::cargar()
     cout<<"------------------------------------------"<<endl;
     cout<<"-    CARGAR PEDIDO                       -"<< endl;
     cout<<"------------------------------------------"<<endl;
-    cout<<"-    CARGAR CODIGO DE PEDIDO: "<< getCodigo() << endl;
+    cout<<"-    CODIGO AUTOGENERADO    : "<< getCodigo() << endl;
     cout<<"-    CARGAR ID ARTICULO     : ";
     idArticulo= ingresoEnteroValidado();
     pos= buscarArticulo(idArticulo);
@@ -265,7 +265,7 @@ void ingresarPedido()
     Articulo art;
     int aux;
     cout<<"------------------------------------------"<<endl;
-    cout<<"-    INGRESAR PEDIDO                     -"<< endl;
+    cout<<"-    INGRESAR PEDIDO                     -"<<endl;
     cout<<"------------------------------------------"<<endl;
     cout<<"- INGRESAR CODIGO DE PEDIDO:";
     aux= ingresoEnteroValidado();
@@ -274,7 +274,7 @@ void ingresarPedido()
     if(p==NULL)
     {
         cout<<"------------------------------------------"<<endl;
-        cout<<"-    NO SE PUDO ABRIR EL ARCHIVO!        -"<< endl;
+        cout<<"-    NO SE PUDO ABRIR EL ARCHIVO!        -"<<endl;
         cout<<"------------------------------------------"<<endl;
         return;
     }
@@ -291,7 +291,7 @@ void ingresarPedido()
             if(encontrado== true)
             {
                 cout<<"------------------------------------------"<<endl;
-                cout<<"-    PEDIDO ENCONTRADO!                  -" <<endl;
+                cout<<"-    PEDIDO ENCONTRADO!                  -"<<endl;
                 cout<<"------------------------------------------"<<endl;
             }
             break;
@@ -302,6 +302,8 @@ void ingresarPedido()
         cout<<"------------------------------------------"<<endl;
         cout<<"-    ERROR AL ENCONTRAR PEDIDO!          -"<<endl;
         cout<<"------------------------------------------"<<endl;
+        fclose(p);
+        return;
     }
     fclose(p);
     FILE * p1;
@@ -309,7 +311,7 @@ void ingresarPedido()
     if(p1==NULL)
     {
         cout<<"------------------------------------------"<<endl;
-        cout<<"-    NO SE PUDO ABRIR EL ARCHIVO!        -" << endl;
+        cout<<"-    NO SE PUDO ABRIR EL ARCHIVO!        -"<<endl;
         cout<<"------------------------------------------"<<endl;
     }
     while(fread(&art, sizeof(Articulo), 1, p)== true)
@@ -324,7 +326,7 @@ void ingresarPedido()
             if(encontrado== true)
             {
                 cout<<"------------------------------------------"<<endl;
-                cout<<"-    PEDIDO INGRESADO A STOCK!           -"<< endl;
+                cout<<"-    PEDIDO INGRESADO A STOCK!           -"<<endl;
                 cout<<"------------------------------------------"<<endl;
             }
             break;

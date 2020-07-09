@@ -22,7 +22,7 @@ bool Articulo::setModelo(const char * modelo)
 {
     bool x= true;
     //val
-    strcpy(this->modelo, modelo);
+    strcpy(this->modelo,modelo);
     return x;
 }
 bool Articulo::setTalle(const char * talle)
@@ -145,18 +145,21 @@ bool Articulo::cargar()
     cout<<"------------------------------------------"<<endl;
     cout<<"-    1) CARGAR ARTICULO                  -"<<endl;
     cout<<"------------------------------------------"<<endl;
-    cout<<"-    CARGAR ID       : ";
+    cout<<"-    ID AUTOGENERADO : ";
     cout<< getId() << endl;
     cout<<"-    CARGAR MODELO   : ";
     cargarcadena(modelo, 20);
+    strupr(modelo);
     if(setModelo(modelo)==false)
         return false;
     cout<<"-    CARGAR TALLE    : ";
     cargarcadena(talle, 5);
+    strupr(talle);
     if(setTalle(talle)== false)
         return false;
     cout<<"-    CARGAR GENERO   : ";
     cargarcadena(genero, 10);
+    strupr(genero);
     if(setGenero(genero)== false)
         return false;
     cout<<"-    CARGAR PRECIO   : $";
@@ -265,7 +268,6 @@ void mostrarxid_Articulo()
     }
     fclose(p);
 }
-
 bool Articulo::leer(int pos)
 {
     bool leyo= false;

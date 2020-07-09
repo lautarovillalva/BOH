@@ -139,25 +139,28 @@ bool Proveedor::cargar()
 {
     setId(generarID_proveedor());
     cout<<"     CARGAR PROVEEDOR"<<endl;
-    cout<<"- CARGAR ID            : "<<getId() << endl;
+    cout<<"- ID AUTOGENERADO      : "<<getId() << endl;
     cout<<"- CARGAR CUIT          : ";
     cargarcadena(cuit, 12);
     if(setCuit(cuit)== false)
         return false;
-    cout<<"- CARGAR TELEFONO       : ";
+    cout<<"- CARGAR TELEFONO      : ";
     cargarcadena(telefono, 11);
     if(setTelefono(telefono)== false)
         return false;
     cout<<"- CARGAR RAZON SOCIAL  : ";
     cargarcadena(rsocial, 20);
+    strupr(rsocial);
     if(setRsocial(rsocial)== false)
         return false;
     cout<<"- CARGAR MAIL          : ";
     cargarcadena(mail, 30);
+    strupr(mail);
     if(setMail(mail)== false)
         return false;
     cout<<"- CARGAR DIRECCION     : ";
     cargarcadena(direccion, 20);
+    strupr(direccion);
     if(setDireccion(direccion)== false)
         return false;
     return true;

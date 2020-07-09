@@ -131,7 +131,7 @@ void Grilla::mostrar(int modo)
     {
         cout<<"|"<<setw(12)<<left<<idArticulo<<"|";
         cont.mostrar();
-        cout<<setw(9)<<right<<"|"<<endl;
+        cout<<setw(8)<<right<<"|"<<endl;
     }
 }
 void desengrillar()
