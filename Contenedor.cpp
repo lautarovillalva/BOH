@@ -7,7 +7,7 @@ using namespace std;
 bool Contenedor::setNumero(int numero)
 {
     bool x= true;
-    //val
+    if(numero<0) return false;
     this->numero= numero;
     return x;
 }
