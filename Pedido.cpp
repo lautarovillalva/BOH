@@ -258,85 +258,203 @@ void mostrarxid_pedido()
     }
     fclose(p);
 }
+//void ingresarPedido()
+//{
+//    bool encontrado= false;
+//    Pedido ped;
+//    Articulo art;
+//    int aux;
+//    cout<<"------------------------------------------"<<endl;
+//    cout<<"-    INGRESAR PEDIDO                     -"<<endl;
+//    cout<<"------------------------------------------"<<endl;
+//    cout<<"- INGRESAR CODIGO DE PEDIDO:";
+//    aux= ingresoEnteroValidado();
+//    FILE * p;
+//    p=fopen(ARCHIVO_PEDIDOS, "rb+");
+//    if(p==NULL)
+//    {
+//        cout<<"------------------------------------------"<<endl;
+//        cout<<"-    NO SE PUDO ABRIR EL ARCHIVO!        -"<<endl;
+//        cout<<"------------------------------------------"<<endl;
+//        return;
+//    }
+//    while(fread(&ped, sizeof(Pedido), 1, p)== true)
+//    {
+//        if(aux== ped.getCodigo() && ped.getEstado()== true)
+//        {
+//            Fecha fec;
+//            fec.setHoy();
+//            ped.setFechaIngreso(fec);
+//            ped.setEstado(false);
+//            fseek(p, ftell(p)-sizeof(Pedido), SEEK_SET);
+//            encontrado= fwrite(&ped, sizeof(Pedido), 1, p);
+//            if(encontrado== true)
+//            {
+//                cout<<"------------------------------------------"<<endl;
+//                cout<<"-    PEDIDO ENCONTRADO!                  -"<<endl;
+//                cout<<"------------------------------------------"<<endl;
+//                break;
+//            }
+//        }
+//    }
+//    if(encontrado== false)
+//    {
+//        cout<<"------------------------------------------"<<endl;
+//        cout<<"-    ERROR AL ENCONTRAR PEDIDO!          -"<<endl;
+//        cout<<"------------------------------------------"<<endl;
+//        fclose(p);
+//        return;
+//    }
+//    fclose(p);
+//    FILE * p1;
+//    p1= fopen(ARCHIVO_ARTICULOS, "rb+");
+//    if(p1==NULL)
+//    {
+//        cout<<"------------------------------------------"<<endl;
+//        cout<<"-    NO SE PUDO ABRIR EL ARCHIVO!        -"<<endl;
+//        cout<<"------------------------------------------"<<endl;
+//    }
+//    while(fread(&art, sizeof(Articulo), 1, p)== true)
+//    {
+//        if(ped.getIDArticulo()==art.getId())
+//        {
+//            int cant;
+//            cant= ped.getCantidad()+art.getCantidad();
+//            art.setCantidad(cant);
+//            fseek(p1, ftell(p)-sizeof(Articulo), SEEK_SET);
+//            encontrado= fwrite(&art, sizeof(Articulo), 1, p);
+//            if(encontrado== true)
+//            {
+//                cout<<"------------------------------------------"<<endl;
+//                cout<<"-    PEDIDO INGRESADO A STOCK!           -"<<endl;
+//                cout<<"------------------------------------------"<<endl;
+//            }
+//            break;
+//        }
+//    }
+//    if(encontrado== false)
+//    {
+//        cout<<"------------------------------------------"<<endl;
+//        cout<<"-    ERROR AL INGRESAR PEDIDO AL STOCK!  -"<<endl;
+//        cout<<"------------------------------------------"<<endl;
+//    }
+//    fclose(p1);
+//}
+int buscarPedido(int cod)
+{
+    Pedido ped;
+    int i=0;
+    FILE * p;
+    p=fopen(ARCHIVO_PEDIDOS, "rb");
+    if(p==NULL)
+        return -2;
+    while(fread(&ped, sizeof(Pedido), 1, p)== true)
+    {
+        if(ped.getCodigo() == cod)
+        {
+            fclose(p);
+            return i;
+        }
+        i++;
+    }
+    fclose(p);
+    return -1;
+}
+bool Pedido::leer(int pos)
+{
+    bool leyo= false;
+    FILE * p;
+    p= fopen(ARCHIVO_PEDIDOS, "rb");
+    if(p==NULL)
+        return false;
+    fseek(p, sizeof(Pedido)* pos, SEEK_SET);
+    leyo= fread(this, sizeof(Pedido), 1, p);
+    return leyo;
+}
+bool Pedido::grabar(int pos)
+{
+    bool grabo= false;
+    FILE * p;
+    p= fopen(ARCHIVO_PEDIDOS, "rb+");
+    if(p==NULL)
+        return false;
+    fseek(p, sizeof(Pedido)* pos, SEEK_SET);
+    grabo= fwrite(this, sizeof(Pedido), 1, p);
+    fclose(p);
+    return grabo;
+}
+
 void ingresarPedido()
 {
-    bool encontrado= false;
     Pedido ped;
     Articulo art;
-    int aux;
+    int idaux;
     cout<<"------------------------------------------"<<endl;
     cout<<"-    INGRESAR PEDIDO                     -"<<endl;
     cout<<"------------------------------------------"<<endl;
     cout<<"- INGRESAR CODIGO DE PEDIDO:";
-    aux= ingresoEnteroValidado();
-    FILE * p;
-    p=fopen(ARCHIVO_PEDIDOS, "rb+");
-    if(p==NULL)
+    idaux= ingresoEnteroValidado();
+    int pos1= buscarPedido(idaux);
+    if(pos1== -2)
     {
         cout<<"------------------------------------------"<<endl;
         cout<<"-    NO SE PUDO ABRIR EL ARCHIVO!        -"<<endl;
         cout<<"------------------------------------------"<<endl;
         return;
     }
-    while(fread(&ped, sizeof(Pedido), 1, p)== true)
-    {
-        if(aux== ped.getCodigo() && ped.getEstado()== true)
-        {
-            Fecha fec;
-            fec.setHoy();
-            ped.setFechaIngreso(fec);
-            ped.setEstado(false);
-            fseek(p, ftell(p)-sizeof(Pedido), SEEK_SET);
-            encontrado= fwrite(&ped, sizeof(Pedido), 1, p);
-            if(encontrado== true)
-            {
-                cout<<"------------------------------------------"<<endl;
-                cout<<"-    PEDIDO ENCONTRADO!                  -"<<endl;
-                cout<<"------------------------------------------"<<endl;
-            }
-            break;
-        }
-    }
-    if(encontrado== false)
+    else if(pos1== -1)
     {
         cout<<"------------------------------------------"<<endl;
         cout<<"-    ERROR AL ENCONTRAR PEDIDO!          -"<<endl;
         cout<<"------------------------------------------"<<endl;
-        fclose(p);
         return;
     }
-    fclose(p);
-    FILE * p1;
-    p1= fopen(ARCHIVO_ARTICULOS, "rb+");
-    if(p1==NULL)
+    if(ped.leer(pos1)== true)
+    {
+        cout<<"------------------------------------------"<<endl;
+        cout<<"-    PEDIDO ENCONTRADO!                  -"<<endl;
+        cout<<"------------------------------------------"<<endl;
+    }
+    if(ped.getEstado()== false)
+    {
+        cout<<"------------------------------------------"<<endl;
+        cout<<"-    ERROR: EL PEDIDO YA ESTA INGRESADO! -"<<endl;
+        cout<<"------------------------------------------"<<endl;
+        return;
+    }
+    Fecha fec;
+    fec.setHoy();
+    ped.setFechaIngreso(fec);
+    ped.setEstado(false);
+    ped.grabar(pos1);
+
+    int pos2= buscarArticulo(ped.getIDArticulo());
+     if(pos2== -2)
     {
         cout<<"------------------------------------------"<<endl;
         cout<<"-    NO SE PUDO ABRIR EL ARCHIVO!        -"<<endl;
         cout<<"------------------------------------------"<<endl;
+        return;
     }
-    while(fread(&art, sizeof(Articulo), 1, p)== true)
-    {
-        if(ped.getIDArticulo()==art.getId())
-        {
-            int cant;
-            cant= ped.getCantidad()+art.getCantidad();
-            art.setCantidad(cant);
-            fseek(p1, ftell(p)-sizeof(Articulo), SEEK_SET);
-            encontrado= fwrite(&art, sizeof(Articulo), 1, p);
-            if(encontrado== true)
-            {
-                cout<<"------------------------------------------"<<endl;
-                cout<<"-    PEDIDO INGRESADO A STOCK!           -"<<endl;
-                cout<<"------------------------------------------"<<endl;
-            }
-            break;
-        }
-    }
-    if(encontrado== false)
+    else if(pos2== -1)
     {
         cout<<"------------------------------------------"<<endl;
-        cout<<"-    ERROR AL INGRESAR PEDIDO AL STOCK!  -"<<endl;
+        cout<<"-    ERROR AL ENCONTRAR ARTICULO!        -"<<endl;
+        cout<<"------------------------------------------"<<endl;
+        return;
+    }
+    if(art.leer(pos2)== true)
+    {
+        cout<<"------------------------------------------"<<endl;
+        cout<<"-    ARTICULO ENCONTRADO!                -"<<endl;
         cout<<"------------------------------------------"<<endl;
     }
-    fclose(p1);
+    int cantidad= ped.getCantidad() + art.getCantidad();
+    art.setCantidad(cantidad);
+    if(art.grabar(pos2)== true)
+    {
+        cout<<"------------------------------------------"<<endl;
+        cout<<"- PEDIDO INGRESADO A STOCK CORRECTAMENTE!-"<<endl;
+        cout<<"------------------------------------------"<<endl;
+    }
 }

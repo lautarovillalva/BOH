@@ -140,7 +140,7 @@ void desengrillar()
     Articulo art;
     Grilla gri;
     cout<<"------------------------------------------"<<endl;
-    cout<<"-    DESENGRILLAR" << endl;
+    cout<<"-    DESENGRILLAR                        -"<< endl;
     cout<<"------------------------------------------"<<endl;
     cout<<"-    ID ARTICULO QUE DESEA DESENGRILLAR: ";
     idaux= ingresoEnteroValidado();
@@ -183,7 +183,11 @@ void desengrillar()
                 gri.setEstado(false);
                 fseek(p, ftell(p)-sizeof(Grilla), SEEK_SET);
                 if(fwrite(&gri, sizeof(Grilla), 1, p)== true)
-                    cout<<"-  DESENGRILLADO CORRECTAMENTE! "<< endl;
+                    cout<<"------------------------------------------"<<endl;
+                    cout<<"-  DESENGRILLADO CORRECTAMENTE!          -"<< endl;
+                    cout<<"------------------------------------------"<<endl;
+                    fclose(p);
+                    return;
             }
         }
     }

@@ -32,15 +32,17 @@ public:
     bool getEstado();
 //constructor
     Pedido();
-
+    bool leer(int );
     void nuevo();
     bool cargar();
     bool guardar();
+    bool grabar(int );
     void mostrar(int );
 
 };
 int generarID_pedido();
 void mostrarxid_pedido();
 void ingresarPedido();
+int buscarPedido(int );
 
 #endif // PEDIDO_H_INCLUDED

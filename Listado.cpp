@@ -22,7 +22,6 @@ void listarPedidosNoIngresados()
     cout<<"------------------------------------------"<<endl;
     cout<<"-        PEDIDOS NO INGRESADOS           -"<<endl;
     cout<<"------------------------------------------"<<endl;
-    cout<<"--------------------------------------------------------------"<<endl;
 //    cout<<"|"<<setw(12)<<left<<"FECHA";
 //    cout<<"|"<<setw(10)<<left<<"CODIGO"<<"|"<<setw(12)<<"COD. ART."<<"|"<<setw(12)<<"COD. PROV."<<"|"<<setw(10)<<"CANTIDAD"<<"|"<<endl;
     while(fread(&ped, sizeof(Pedido), 1, p)==true)
@@ -30,7 +29,7 @@ void listarPedidosNoIngresados()
         if(ped.getEstado()==true)
             ped.mostrar(1);
     }
-    cout<<"--------------------------------------------------------------"<<endl;
+    cout<<"------------------------------------------"<<endl;
     fclose(p);
 }
 void listarPedidosIngresados()

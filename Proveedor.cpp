@@ -12,14 +12,14 @@ using namespace std;
 bool Proveedor::setId(int id)
 {
     bool x= true;
-    //val
+    if(id<0) return false;
     this->id= id;
     return x;
 }
 bool Proveedor::setCuit(const char * cuit)
 {
     bool x= true;
-    //val
+    if(strcmp(cuit,"\0")==0 || strcmp(cuit," ")==0) return false;
     strcpy(this->cuit, cuit);
     return x;
 }
@@ -33,7 +33,7 @@ bool Proveedor::setTelefono(const char * telefono)
 bool Proveedor::setRsocial(const char * rsocial)
 {
     bool x= true;
-    //val
+    if(strcmp(rsocial,"\0")==0 || strcmp(rsocial," ")==0) return false;
     strcpy(this->rsocial, rsocial);
     return x;
 }
@@ -138,10 +138,19 @@ int generarID_proveedor()
 bool Proveedor::cargar()
 {
     setId(generarID_proveedor());
-    cout<<"     CARGAR PROVEEDOR"<<endl;
+    cout<<"------------------------------------------"<<endl;
+    cout<<"     CARGAR PROVEEDOR                    -"<<endl;
+    cout<<"------------------------------------------"<<endl;
     cout<<"- ID AUTOGENERADO      : "<<getId() << endl;
     cout<<"- CARGAR CUIT          : ";
     cargarcadena(cuit, 12);
+    if(validarCuit(cuit)== false)
+    {
+        cout<<"------------------------------------------"<<endl;
+        cout<<"     ERROR AL CARGAR CUIT!               -"<<endl;
+        cout<<"------------------------------------------"<<endl;
+        return false;
+    }
     if(setCuit(cuit)== false)
         return false;
     cout<<"- CARGAR TELEFONO      : ";
@@ -151,6 +160,13 @@ bool Proveedor::cargar()
     cout<<"- CARGAR RAZON SOCIAL  : ";
     cargarcadena(rsocial, 20);
     strupr(rsocial);
+    if(validarRsocial(rsocial)== false)
+    {
+        cout<<"------------------------------------------"<<endl;
+        cout<<"     ERROR AL CARGAR RAZON SOCIAL!       -"<<endl;
+        cout<<"------------------------------------------"<<endl;
+        return false;
+    }
     if(setRsocial(rsocial)== false)
         return false;
     cout<<"- CARGAR MAIL          : ";
@@ -227,7 +243,7 @@ void modificarProveedor()
     cout<<"------------------------------------------"<<endl;
     cout<<"-    MODIFICAR PROVEEDOR                 -"<<endl;
     cout<<"------------------------------------------"<<endl;
-    cout<<"-    ID PROVEEDOR QUE DESEA MODIFICAR";
+    cout<<"-    ID PROVEEDOR QUE DESEA MODIFICAR: ";
     aux= ingresoEnteroValidado();
     FILE * p;
     p=fopen(ARCHIVO_PROVEEDORES, "rb+");
@@ -246,6 +262,7 @@ void modificarProveedor()
             cout<<"-    "<<obj.getRsocial()<<endl;
             cout<<"-    MODIFICAR NUEVA DIRECCION: ";
             cargarcadena(cadaux, 20);
+            strupr(cadaux);
             if(obj.setDireccion(cadaux)== false)
                 return;
             fseek(p, ftell(p)-sizeof(Proveedor), SEEK_SET);

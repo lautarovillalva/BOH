@@ -28,6 +28,7 @@ public:
     //constructor
     Articulo();
 
+    bool grabar(int );
     bool leer(int );
     void nuevo();
     bool cargar();

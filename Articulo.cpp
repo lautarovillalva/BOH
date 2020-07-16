@@ -14,14 +14,14 @@ using namespace std;
 bool Articulo::setId(int id)
 {
     bool x= true;
-    //val
+    if(id<0) return false;
     this->id=id;
     return x;
 }
 bool Articulo::setModelo(const char * modelo)
 {
     bool x= true;
-    //val
+    if(strcmp(modelo,"\0")==0 || strcmp(modelo," ")==0) return false;
     strcpy(this->modelo,modelo);
     return x;
 }
@@ -42,14 +42,14 @@ bool Articulo::setGenero( const char * genero)
 bool Articulo::setCantidad(int cantidad)
 {
     bool x= true;
-    //val
+    if(cantidad<0) return false;
     this->cantidad= cantidad;
     return x;
 }
 bool Articulo::setPrecio(float precio)
 {
     bool x= true;
-    //val
+    if(precio<0) return false;
     this->precio= precio;
     return x;
 }
@@ -143,13 +143,20 @@ bool Articulo::cargar()
 
     setId(generarID_articulo());
     cout<<"------------------------------------------"<<endl;
-    cout<<"-    1) CARGAR ARTICULO                  -"<<endl;
+    cout<<"-       CARGAR ARTICULO                  -"<<endl;
     cout<<"------------------------------------------"<<endl;
     cout<<"-    ID AUTOGENERADO : ";
     cout<< getId() << endl;
     cout<<"-    CARGAR MODELO   : ";
     cargarcadena(modelo, 20);
     strupr(modelo);
+    if(validarModelo(modelo)== false)
+    {
+        cout<<"------------------------------------------"<<endl;
+        cout<<"-    ERROR AL CARGAR MODELO!             -"<<endl;
+        cout<<"------------------------------------------"<<endl;
+        return false;
+    }
     if(setModelo(modelo)==false)
         return false;
     cout<<"-    CARGAR TALLE    : ";
@@ -298,4 +305,16 @@ int buscarArticulo(int idA)
     }
     fclose(p);
     return -1;
+}
+bool Articulo::grabar(int pos)
+{
+    bool grabo= false;
+    FILE * p;
+    p= fopen(ARCHIVO_ARTICULOS, "rb+");
+    if(p==NULL)
+        return false;
+    fseek(p, sizeof(Articulo)* pos, SEEK_SET);
+    grabo= fwrite(this, sizeof(Articulo), 1, p);
+    fclose(p);
+    return grabo;
 }
